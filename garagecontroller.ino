@@ -30,7 +30,7 @@ const char* garageToHouse_current_state = "UNDEFINED";
 
 
 // Minimum stable period in milliseconds
-const unsigned long stablePeriod = 10000;
+const unsigned long stablePeriod = 3000;
 
 // Variables to store the last time a stable state was detected for each door
 unsigned long frontdoor_lastStableTime = 0;
@@ -197,10 +197,10 @@ void checkDoorsState() {
   }
 
   // Garage to House Door
-  const char* garageToHouse_new_state = getDoorState(GARAGE_TO_HOUSE_PIN);
-  if (isStateStable(garageToHouse_lastStableTime, garageToHouse_current_state, garageToHouse_new_state)) {
-    client.publish(garageToHouse_topic, garageToHouse_current_state, true);
-  }
+  // const char* garageToHouse_new_state = getDoorState(GARAGE_TO_HOUSE_PIN);
+  // if (isStateStable(garageToHouse_lastStableTime, garageToHouse_current_state, garageToHouse_new_state)) {
+  //   client.publish(garageToHouse_topic, garageToHouse_current_state, true);
+  // }
 
   //Front Garage Door
   // const char* frontdoor_new_state = getDoorState(FRONTDOOR_PIN);
@@ -217,11 +217,11 @@ void checkDoorsState() {
   // }
 
   // Garage To House Door
-  // const char* garageToHouse_new_state = getDoorState(GARAGE_TO_HOUSE_PIN);
-  // if (strcmp(garageToHouse_new_state, garageToHouse_current_state) != 0) {
-  //   garageToHouse_current_state = garageToHouse_new_state;
-  //   client.publish(garageToHouse_topic, garageToHouse_current_state, true);
-  // }
+  const char* garageToHouse_new_state = getDoorState(GARAGE_TO_HOUSE_PIN);
+  if (strcmp(garageToHouse_new_state, garageToHouse_current_state) != 0) {
+    garageToHouse_current_state = garageToHouse_new_state;
+    client.publish(garageToHouse_topic, garageToHouse_current_state, true);
+  }
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
