@@ -1,0 +1,13 @@
+#ifndef CREDENTIALS_H
+#define CREDENTIALS_H
+
+// Replace with your actual SSID and password:
+#define WIFI_SSID "SSID HERE"
+#define WIFI_PASSWORD "WIFI PASSWORD HERE"
+
+#define MQTT_USERNAME "MQTT USERNAME HERE"
+#define MQTT_PASSWORD "MQTT PASSWORD HERE"
+#define MQTT_PORT 1883
+#define MQTT_SERVER "MQTT IP ADDRESS"
+
+#endif
