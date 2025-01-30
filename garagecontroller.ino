@@ -1,5 +1,6 @@
 #include <NewPing.h>
 #include <Credentials.h>
+#include <MqttTopics.h>
 #include <DHT.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
@@ -8,21 +9,6 @@
 #define DHTTYPE DHT22
 
 const char* DEVICE_NAME = "GARAGE CONTROLLER";
-
-const char* frontdoor_topic = "garage/sensor/door/frontdoor";
-const char* frontbutton_topic = "garage/relay/door/frontdoor";
-const char* backdoor_topic = "garage/sensor/door/backdoor";
-const char* backbutton_topic = "garage/relay/door/backdoor";
-const char* garageToHouse_topic = "garage/sensor/door/garagetohouse";
-
-const char* frontdoor_status_topic = "garage/door/status/front";
-const char* backdoor_status_topic = "garage/door/status/back";
-
-const char* esp_restart_topic = "garage/controller/restart";
-const char* collin_car_topic = "garage/sensor/car/collin";
-const char* cheryl_car_topic = "garage/sensor/car/cheryl";
-const char* temperature_topic = "garage/sensor/dht/temperature";
-const char* humidity_topic = "garage/sensor/dht/humidity";
 
 const char* frontdoor_current_state = "UNDEFINED";
 const char* backdoor_current_state = "UNDEFINED";
@@ -136,10 +122,12 @@ void checkCarPresence() {
   lastCarPrensenceReadTime = millis();
 
   float newDistanceCheryl = sonarCheryl.ping_cm();
-  // client.publish("garage/sensor/car/cheryl/distance", String(newDistanceCheryl).c_str());
+  //For debugging or setting height limits on automations
+  // client.publish(cheryl_car_distance_topic, String(newDistanceCheryl).c_str());
   delay(200);
   float newDistanceCollin = sonarCollin.ping_cm();
-  // client.publish("garage/sensor/car/collin/distance", String(newDistanceCollin).c_str());
+  //For debugging or setting height limits on automations
+  // client.publish(collin_car_distance_topic, String(newDistanceCollin).c_str());
 
   if (newDistanceCheryl == 0) {
     newDistanceCheryl = sonarCheryl.ping_cm();
