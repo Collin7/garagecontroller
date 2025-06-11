@@ -219,7 +219,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   if (strcmp(strTopic, frontbutton_topic) == 0) {
     char* frontDoorContact = (char*)payload;
     // Serial.println(frontDoorContact);
-    if (strcmp(frontDoorContact, "OPEN") == 0) {
+    if (strcmp(frontDoorContact, "OPEN") == 0 || strcmp(frontDoorContact, "CLOSE") == 0) {
       //'click' the relay
       digitalWrite(FRONTDOOR_RELAY_PIN, LOW);
       delay(600);
@@ -229,7 +229,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     }
   } else if (strcmp(strTopic, backbutton_topic) == 0) {
     char* backDoorContact = (char*)payload;
-    if (strcmp(backDoorContact, "OPEN") == 0) {
+    if (strcmp(backDoorContact, "OPEN") == 0 || strcmp(backDoorContact, "CLOSE") == 0) {
       //'click' the relay
       digitalWrite(BACKDOOR_RELAY_PIN, LOW);
       delay(600);
