@@ -137,13 +137,13 @@ void checkCarPresence() {
     newDistanceCollin = sonarCollin.ping_cm();
   }
 
-  const char* newBakkieStatus = (newDistanceCollin > 200) ? "AWAY" : "HOME";
+  const char* newBakkieStatus = (newDistanceCollin > 200) ? "off" : "on"; //ON is home
   if (strcmp(newBakkieStatus, bakkieStatus) != 0) {
     bakkieStatus = newBakkieStatus;
     client.publish(collin_car_topic, bakkieStatus);
   }
 
-  const char* newMazdaStatus = (newDistanceCheryl > 200) ? "AWAY" : "HOME";
+  const char* newMazdaStatus = (newDistanceCheryl > 200) ? "off" : "on";
   if (newMazdaStatus != mazdaStatus) {
     mazdaStatus = newMazdaStatus;
     client.publish(cheryl_car_topic, mazdaStatus);
@@ -153,7 +153,7 @@ void checkCarPresence() {
 void checkDoorsState() {
 
   auto getDoorState = [](int pin) -> const char* {
-    return digitalRead(pin) == 0 ? "closed" : "open";
+    return digitalRead(pin) == 0 ? "Closed" : "Open";
   };
 
    // Stable state logic as a lambda function
