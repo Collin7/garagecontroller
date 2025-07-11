@@ -16,7 +16,7 @@ const char* garageToHouse_current_state = "UNDEFINED";
 
 
 // Minimum stable period in milliseconds
-const unsigned long stablePeriod = 3000;
+const unsigned long stablePeriod = 2000;
 
 // Variables to store the last time a stable state was detected for each door
 unsigned long frontdoor_lastStableTime = 0;
@@ -219,7 +219,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   if (strcmp(strTopic, frontbutton_topic) == 0) {
     char* frontDoorContact = (char*)payload;
     // Serial.println(frontDoorContact);
-    if (strcmp(frontDoorContact, "OPEN") == 0 || strcmp(frontDoorContact, "CLOSE") == 0) {
+    if (strcmp(frontDoorContact, "Open") == 0 || strcmp(frontDoorContact, "Closed") == 0) {
       //'click' the relay
       digitalWrite(FRONTDOOR_RELAY_PIN, LOW);
       delay(600);
@@ -229,7 +229,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     }
   } else if (strcmp(strTopic, backbutton_topic) == 0) {
     char* backDoorContact = (char*)payload;
-    if (strcmp(backDoorContact, "OPEN") == 0 || strcmp(backDoorContact, "CLOSE") == 0) {
+    if (strcmp(backDoorContact, "Open") == 0 || strcmp(backDoorContact, "Closed") == 0) {
       //'click' the relay
       digitalWrite(BACKDOOR_RELAY_PIN, LOW);
       delay(600);
